@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaniv Maimon - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.4;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            padding: 30px 15px;
+            font-size: 0.55em;
+        }
+        
+        /* RTL Support for Hebrew */
+        body.rtl {
+            direction: rtl;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body.rtl .contact-bar {
+            flex-direction: row-reverse;
+        }
+        
+        body.rtl .job-header {
+            flex-direction: row-reverse;
+        }
+        
+        body.rtl .job {
+            padding-left: 0;
+            padding-right: 25px;
+            border-left: none;
+            border-right: 3px solid #f0f0f0;
+        }
+        
+        body.rtl .job::before {
+            left: auto;
+            right: -7px;
+        }
+        
+        body.rtl .section-title::after {
+            left: auto;
+            right: 0;
+        }
+        
+        body.rtl .education-box,
+        body.rtl .cert-item,
+        body.rtl .reference-box {
+            border-left: none;
+            border-right: 4px solid;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Language Toggle */
+        .lang-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            background: rgba(0, 217, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 8px 15px;
+            display: flex;
+            gap: 10px;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+        }
+        
+        .lang-toggle button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 12px;
+            border-radius: 15px;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+        
+        .lang-toggle button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .lang-toggle button.active {
+            background: #00D9FF;
+            color: #000;
+        }
+        
+        /* Hide inactive language */
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #0f3460 100%);
+            color: white;
+            padding: 35px 50px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #00D9FF 0%, #0066FF 100%);
+            border-radius: 50%;
+            transform: translate(40%, -40%);
+            opacity: 0.25;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #FF00FF 0%, #00D9FF 100%);
+            border-radius: 50%;
+            opacity: 0.15;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+        
+        .header .name-first {
+            color: white;
+        }
+        
+        .header .name-last {
+            color: white;
+        }
+        
+        .header .title {
+            font-size: 1.3em;
+            color: #00D9FF;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        
+        .header-summary {
+            max-width: 700px;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .contact-bar {
+            display: flex;
+            gap: 25px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-bar a {
+            color: #00D9FF;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .contact-bar a:hover {
+            color: #ffffff;
+        }
+        
+        .content {
+            padding: 35px 50px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #00D9FF 0%, #0066FF 70%, #FF00FF 100%);
+        }
+        
+        .job {
+            margin-bottom: 25px;
+            padding-left: 25px;
+            border-left: 3px solid #f0f0f0;
+            position: relative;
+        }
+        
+        .job::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 11px;
+            height: 11px;
+            background: linear-gradient(135deg, #00D9FF 0%, #0066FF 100%);
+            border-radius: 50%;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .job-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: -0.5px;
+        }
+        
+        .job-date {
+            color: #666;
+            font-weight: 600;
+            font-size: 0.95em;
+            background: #f5f5f5;
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+        
+        .company {
+            color: #0066FF;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.15em;
+        }
+        
+        .job ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .job ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .job ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #00D9FF;
+            font-weight: bold;
+        }
+        
+        body.rtl .job ul li {
+            padding-left: 0;
+            padding-right: 20px;
+        }
+        
+        body.rtl .job ul li::before {
+            left: auto;
+            right: 0;
+        }
+        
+        .two-column-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border-left: 3px solid #00D9FF;
+        }
+        
+        body.rtl .project-card {
+            border-left: none;
+            border-right: 3px solid #00D9FF;
+        }
+        
+        .project-card h3 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #0066FF;
+        }
+        
+        .project-card h3 a {
+            color: #0066FF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .project-card h3 a:hover {
+            color: #00D9FF;
+        }
+        
+        .project-desc {
+            font-size: 0.95em;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .skill-category-inline {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .skill-category-inline strong {
+            color: #0066FF;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        body.rtl .skill-category-inline strong {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+        
+        .two-column-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .education-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #a855f7;
+        }
+        
+        body.rtl .education-box {
+            border-left: none;
+            border-right: 4px solid #a855f7;
+        }
+        
+        .education-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 6px;
+        }
+        
+        .education-details {
+            color: #666;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+        
+        .cert-grid {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .cert-item {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 12px 18px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95em;
+        }
+        
+        body.rtl .cert-item {
+            border-left: none;
+            border-right: 3px solid #3b82f6;
+        }
+        
+        .reference-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #1a1a1a;
+            padding: 20px;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid #00D9FF;
+        }
+        
+        body.rtl .reference-box {
+            border-left: none;
+            border-right: 4px solid #00D9FF;
+        }
+        
+        .reference-box strong {
+            font-size: 1.1em;
+            color: #0066FF;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .lang-toggle {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .two-column-section,
+            .two-column-bottom {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .lang-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Language Toggle -->
+        <div class="lang-toggle">
+            <button onclick="switchLanguage('en')" id="btn-en" class="active">English</button>
+            <button onclick="switchLanguage('he')" id="btn-he">עברית</button>
+        </div>
+
+        <!-- ENGLISH VERSION -->
+        <div id="lang-en" class="lang-content active">
+            <div class="header">
+                <h1>Yaniv Maimon</h1>
+                <div class="title">Cloud Specialist | Technical Support | Data Engineer</div>
+                <div class="header-summary">
+                    Cloud specialist with experience supporting global enterprise customers across Data, AI, Network, and Infrastructure. Extensive knowledge in the data field with a background in teaching mathematics, coding, and machine learning at the academy level. Great guiding skills with patience and empathy. Fluent in English, loyal to the organization, and deeply committed to customer and team satisfaction.
+                </div>
+                <div class="contact-bar">
+                    <a href="mailto:yanivmaimon18@gmail.com">📧 yanivmaimon18@gmail.com</a>
+                    <a href="tel:0508839901">📞 050-883-9901</a>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="section">
+                    <h2 class="section-title">Professional Experience</h2>
+                    
+                    <div class="job">
+                        <div class="job-header">
+                            <div class="job-title">Technical Support Engineer - Data & AI</div>
+                            <div class="job-date">Jan 2022 – Mar 2025</div>
+                        </div>
+                        <div class="company">Google Cloud Platform</div>
+                        <ul>
+                            <li>Provided technical support for cloud platform services to enterprise customers globally, specializing in Big Data & AI products with <strong>fluent English communication</strong> across diverse international clients.</li>
+                            <li>Investigated production issues by querying system logs and utilizing <strong>Google Admin access</strong> to customer environments (including Apple, Spotify) to assess configurations, diagnose root causes, and resolve critical problems in both real-time and batch processing systems.</li>
+                            <li>Debugged <strong>BigQuery SQL queries</strong> by analyzing query execution plans to identify bottlenecks and optimize query performance. Inspected <strong>Vertex AI</strong> (Gemini's engine) execution issues, troubleshooting <strong>machine learning model deployments</strong>, model serving latency, prediction accuracy, and integration challenges in production environments.</li>
+                            <li>Guided new team members on task prioritization, technical orientation, and setup for handling multiple concurrent responsibilities. Demonstrated patience and thoroughness in delivering customer care and providing colleague assistance.</li>
+                            <li><strong>Collaborated with cross-functional teams</strong> including Product Engineering, Technical Account Managers, and Customer Engineering to escalate and resolve critical blockers.</li>
+                            <li>Authored detailed <strong>postmortems, documentation, and optimization guides</strong> for cloud-based services, reducing resolution times and improving knowledge sharing.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Academic Experience & Projects</h2>
+                    <div class="two-column-section">
+                        <div class="academic-left">
+                            <div class="job">
+                                <div class="job-header">
+                                    <div class="job-title">Data Science Instructor</div>
+                                    <div class="job-date">2019 – Dec 2021</div>
+                                </div>
+                                <div class="company">Yezreel Valley College</div>
+                                <ul>
+                                    <li>Collaborated with the Data Science Department to mentor students and deliver lessons in data, Statistics, Math, Python, SQL, Tableau (data visualization), Advanced Python for ML and ANN—bridging theoretical knowledge with real-world data applications.</li>
+                                    <li>Initiated and executed independent projects in data processing & visualizing—including the development of automation tools and analytical dashboards. <a href="https://github.com/yanivmm/Data-Science" target="_blank" style="color: #0066FF; text-decoration: none;">GitHub repository 🔗</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="projects-right">
+                            <div class="project-card">
+                                <h3><a href="https://github.com/yanivmm/sensor-analysis-assignment/blob/main/example.ipynb" target="_blank">Sensor Data Analysis 🔗</a></h3>
+                                <div class="project-desc">Python notebook for analyzing sensor data. Includes EDA, anomaly detection, and model validation for diagnosing system-level errors.</div>
+                            </div>
+                            <div class="project-card">
+                                <h3><a href="https://github.com/yanivmm/Data-Science/blob/master/NLP.ipynb" target="_blank">NLP Processing 🔗</a></h3>
+                                <div class="project-desc">Text processing pipeline with feature engineering for sentiment analysis and classification tasks.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="skill-category-inline">
+                        <strong>Cloud Platforms:</strong> Google Cloud Platform (BigQuery, Vertex AI, Dataflow, Dataproc, GKE, Cloud Storage, IAM, VPC Networking, Pub/Sub, Cloud Functions, Composer, Cloud SQL, Cloud Monitoring) • AWS & Azure fundamentals
+                    </div>
+                    <div class="skill-category-inline">
+                        <strong>Data & Analytics:</strong> SQL • Python (Pandas, NumPy) • Data Visualization • ETL Processes • Statistical Analysis
+                    </div>
+                    <div class="skill-category-inline">
+                        <strong>Core Competencies:</strong> Technical Troubleshooting • System Debugging • Performance Tuning • Root Cause Analysis • Cross-functional Collaboration • Technical Documentation • Customer Support • Training & Mentoring
+                    </div>
+                    <div class="skill-category-inline">
+                        <strong>Languages & Tools:</strong> Python • SQL • Bash • Git • Jupyter • Command Line Tools
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="two-column-bottom">
+                        <div>
+                            <h2 class="section-title">Education</h2>
+                            <div class="education-box">
+                                <div class="education-title">B.Sc. Information Systems – Data Science</div>
+                                <div class="education-details">Yezreel Valley College | 2017 – 2020 | Average: 88</div>
+                            </div>
+                            <h2 class="section-title" style="margin-top: 25px;">Reference</h2>
+                            <div class="reference-box">
+                                <strong>Dr. Nissim Amos</strong><br>
+                                Head of Electrical and Electronics Engineering Department | Kinneret Academic College
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Certifications</h2>
+                            <div class="cert-grid">
+                                <div class="cert-item">Google Cloud Associate Cloud Engineer (ACE)</div>
+                                <div class="cert-item">Google-Internal Certifications for Big Data & AI Products</div>
+                                <div class="cert-item">Google Customer Success Protocols & Best Practices</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEBREW VERSION -->
+        <div id="lang-he" class="lang-content">
+            <div class="header">
+                <h1>יניב מימון</h1>
+                <div class="title">מומחה ענן | תמיכה טכנית | מהנדס נתונים</div>
+                <div class="header-summary">
+                    מומחה ענן עם ניסיון בתמיכה ללקוחות ארגוניים גלובליים בתחומי נתונים, בינה מלאכותית, רשתות ותשתיות. ידע נרחב בתחום הנתונים עם רקע בהוראת מתמטיקה, תכנות ולמידת מכונה ברמה אקדמית. כישורי הדרכה מעולים עם סבלנות ואמפתיה. אנגלית שוטפת, נאמן לארגון ומחויב למקסימום שביעות רצון של לקוחות וצוות.
+                </div>
+                <div class="contact-bar">
+                    <a href="mailto:yanivmaimon18@gmail.com">📧 yanivmaimon18@gmail.com</a>
+                    <a href="tel:0508839901">📞 050-883-9901</a>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="section">
+                    <h2 class="section-title">ניסיון מקצועי</h2>
+                    
+                    <div class="job">
+                        <div class="job-header">
+                            <div class="job-title">מהנדס תמיכה טכנית - נתונים ובינה מלאכותית</div>
+                            <div class="job-date">ינואר 2022 – מרץ 2025</div>
+                        </div>
+                        <div class="company">Google Cloud Platform</div>
+                        <ul>
+                            <li>מתן תמיכה טכנית בשירותי פלטפורמת ענן ללקוחות ארגוניים ברחבי העולם, התמחות במוצרי Big Data ובינה מלאכותית עם <strong>תקשורת אנגלית שוטפת</strong> עם לקוחות בינלאומיים מגוונים.</li>
+                            <li>חקירת בעיות בסביבות ייצור באמצעות שאילתות ללוגי מערכת ושימוש ב-<strong>Google Admin</strong> לגישה לסביבות ייצור של לקוחות (כולל Apple, Spotify) לצורך הערכה, בדיקת תצורות ופתרון בעיות קריטיות במערכות זמן אמת ו-batch.</li>
+                            <li>דיבאג של <strong>שאילתות SQL ב-BigQuery</strong> באמצעות ניתוח תוכניות ביצוע (execution plans) לזיהוי צווארי בקבוק ואופטימיזציה של ביצועי שאילתות. בדיקת בעיות ביצוע ב-<strong>Vertex AI</strong> (מנוע Gemini), פתרון בעיות ב<strong>פריסת מודלים של למידת מכונה</strong>, זמן אחזור מודלים, דיוק חיזויים ואתגרי אינטגרציה בסביבות ייצור.</li>
+                            <li>הדרכת חברי צוות חדשים בתעדוף משימות, התמצאות טכנית והגדרת תהליכי עבודה למשימות מרובות במקביל. הפגנת סבלנות ויסודיות במתן שירות ללקוחות ובסיוע לעמיתים.</li>
+                            <li><strong>שיתוף פעולה עם צוותים בין-תחומיים</strong> כולל הנדסת מוצר, מנהלי חשבונות טכניים והנדסת לקוחות לפתרון חסמים קריטיים.</li>
+                            <li>כתיבת <strong>דוחות תקלות מפורטים, תיעוד ומדריכי אופטימיזציה</strong> לשירותי ענן, תרומה לבסיס ידע והפחתת זמני פתרון.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">ניסיון אקדמי ופרויקטים</h2>
+                    <div class="two-column-section">
+                        <div class="academic-left">
+                            <div class="job">
+                                <div class="job-header">
+                                    <div class="job-title">מדריך מדעי נתונים</div>
+                                    <div class="job-date">2019 – דצמבר 2021</div>
+                                </div>
+                                <div class="company">המכללה האקדמית עמק יזרעאל</div>
+                                <ul>
+                                    <li>שיתוף פעולה עם המחלקה למדעי הנתונים להדרכת סטודנטים ומתן שיעורים בנתונים, סטטיסטיקה, מתמטיקה, Python, SQL, Tableau (ויזואליזציה של נתונים), Python מתקדם ללמידת מכונה ו-ANN—גישור בין ידע תיאורטי ליישומי נתונים מעשיים.</li>
+                                    <li>יזמתי וביצעתי פרויקטים עצמאיים בעיבוד ויזואליזציה של נתונים—כולל פיתוח כלי אוטומציה ודשבורדים אנליטיים. <a href="https://github.com/yanivmm/Data-Science" target="_blank" style="color: #0066FF; text-decoration: none;">GitHub repository 🔗</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="projects-right">
+                            <div class="project-card">
+                                <h3><a href="https://github.com/yanivmm/sensor-analysis-assignment/blob/main/example.ipynb" target="_blank">ניתוח נתוני חיישנים 🔗</a></h3>
+                                <div class="project-desc">מחברת Python לניתוח נתוני חיישנים. כוללת EDA, גילוי חריגות ואימות מודלים לאבחון שגיאות ברמת מערכת.</div>
+                            </div>
+                            <div class="project-card">
+                                <h3><a href="https://github.com/yanivmm/Data-Science/blob/master/NLP.ipynb" target="_blank">עיבוד NLP 🔗</a></h3>
+                                <div class="project-desc">צינור עיבוד טקסט עם הנדסת מאפיינים לניתוח סנטימנט ומשימות סיווג.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">כישורים טכניים</h2>
+                    <div class="skill-category-inline">
+                        <strong>פלטפורמות ענן:</strong> Google Cloud Platform (BigQuery, Vertex AI, Dataflow, Dataproc, GKE, Cloud Storage, IAM, VPC Networking, Pub/Sub, Cloud Functions, Composer, Cloud SQL, Cloud Monitoring) • יסודות AWS ו-Azure
+                    </div>
+                    <div class="skill-category-inline">
+                        <strong>נתונים ואנליטיקה:</strong> SQL • Python (Pandas, NumPy) • ויזואליזציה של נתונים • תהליכי ETL • ניתוח סטטיסטי
+                    </div>
+                    <div class="skill-category-inline">
+                        <strong>יכולות ליבה:</strong> פתרון בעיות טכני • דיבאג מערכות • כוונון ביצועים • ניתוח שורש הבעיה • שיתוף פעולה בין-תחומי • תיעוד טכני • תמיכה ללקוחות • הדרכה והנחיה
+                    </div>
+                    <div class="skill-category-inline">
+                        <strong>שפות וכלים:</strong> Python • SQL • Bash • Git • Jupyter • כלי שורת פקודה
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="two-column-bottom">
+                        <div>
+                            <h2 class="section-title">השכלה</h2>
+                            <div class="education-box">
+                                <div class="education-title">B.Sc. מערכות מידע – מדעי הנתונים</div>
+                                <div class="education-details">המכללה האקדמית עמק יזרעאל | 2017 – 2020 | ממוצע: 88</div>
+                            </div>
+                            <h2 class="section-title" style="margin-top: 25px;">המלצה</h2>
+                            <div class="reference-box">
+                                <strong>ד"ר נסים עמוס</strong><br>
+                                ראש המחלקה להנדסת חשמל ואלקטרוניקה | המכללה האקדמית כנרת
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="section-title">הסמכות</h2>
+                            <div class="cert-grid">
+                                <div class="cert-item">Google Cloud Associate Cloud Engineer (ACE)</div>
+                                <div class="cert-item">הסמכות פנימיות של Google למוצרי Big Data ו-AI</div>
+                                <div class="cert-item">פרוטוקולי הצלחת לקוחות Google ושיטות עבודה מומלצות</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language switching functionality
+        function switchLanguage(lang) {
+            // Hide all language versions
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Remove active state from all buttons
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected language
+            document.getElementById('lang-' + lang).classList.add('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+            
+            // Toggle RTL for Hebrew
+            if (lang === 'he') {
+                document.body.classList.add('rtl');
+                document.documentElement.setAttribute('lang', 'he');
+            } else {
+                document.body.classList.remove('rtl');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+            
+            // Save preference to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        // Load preferred language on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                switchLanguage(savedLang);
+            }
+        });
+    </script>
+</body>
+</html>
